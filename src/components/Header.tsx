@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -39,7 +40,7 @@ const Header = () => {
           className="flex items-center text-voyage-primary"
           aria-label="Program Davrane Home"
         >
-          <img src="https://i.imgur.com/fjHClAn.png" alt="Program Davrane" className="h-12 w-auto" />
+          <img src="https://i.imgur.com/fjHClAn.png" alt="Program Davrane" className="h-36 w-auto" />
         </Link>
         
         <nav className="hidden md:flex items-center space-x-1">
