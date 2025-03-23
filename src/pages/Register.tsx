@@ -91,11 +91,11 @@ const Register = () => {
               <span>Back to Home</span>
             </Link>
             
-            <div className="flex items-center my-6">
-              <img src="/logo.png" alt="Program Davrane" className="h-10 w-auto mr-3" />
-              <div>
+            <div className="flex flex-col items-center my-6">
+              <img src="/logo.png" alt="Program Davrane" className="h-20 w-auto mb-4" />
+              <div className="text-center">
                 <h1 className="text-3xl font-bold mb-2">Create your account</h1>
-                <p className="text-gray-600">Join Program Davrane for a chance to win international travel</p>
+                <p className="text-gray-600">Join for a chance to win international travel</p>
               </div>
             </div>
           </div>

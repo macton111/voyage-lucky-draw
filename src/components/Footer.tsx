@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import { 
   Facebook, 
@@ -16,9 +17,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Column 1 - About */}
           <div>
-            <div className="flex items-center space-x-2 text-voyage-primary mb-4">
-              <img src="/logo.png" alt="Program Davrane" className="h-8 w-auto" />
-              <span className="text-xl font-semibold">Program Davrane</span>
+            <div className="flex justify-start mb-4">
+              <img src="/logo.png" alt="Program Davrane" className="h-14 w-auto" />
             </div>
             <p className="text-gray-600 text-sm mb-6">
               Program Davrane is a lottery platform offering participants the opportunity to win 

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -37,16 +36,12 @@ const Header = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link 
           to="/" 
-          className="flex items-center space-x-2 text-voyage-primary"
+          className="flex items-center text-voyage-primary"
           aria-label="Program Davrane Home"
         >
-          <img src="/logo.png" alt="Program Davrane" className="h-8 w-auto" />
-          <span className="text-xl font-semibold tracking-tight hidden sm:inline-block">
-            Program Davrane
-          </span>
+          <img src="/logo.png" alt="Program Davrane" className="h-12 w-auto" />
         </Link>
         
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-1">
           <NavLink to="/" isActive={isActive('/')}>Home</NavLink>
           <NavLink to="/winners" isActive={isActive('/winners')}>Winners</NavLink>
@@ -84,7 +79,6 @@ const Header = () => {
           )}
         </div>
         
-        {/* Mobile Menu Button */}
         <button 
           className="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -95,7 +89,6 @@ const Header = () => {
         </button>
       </div>
       
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-white bg-opacity-95 backdrop-blur-md shadow-elevated animate-fade-in">
           <div className="flex flex-col p-6 space-y-4">
@@ -139,7 +132,6 @@ const Header = () => {
   );
 };
 
-// Desktop Navigation Link
 const NavLink = ({ to, isActive, children }: { to: string, isActive: boolean, children: React.ReactNode }) => (
   <Link 
     to={to} 
@@ -153,7 +145,6 @@ const NavLink = ({ to, isActive, children }: { to: string, isActive: boolean, ch
   </Link>
 );
 
-// Mobile Navigation Link
 const MobileNavLink = ({ to, isActive, children }: { to: string, isActive: boolean, children: React.ReactNode }) => (
   <Link 
     to={to} 
