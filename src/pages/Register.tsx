@@ -1,10 +1,9 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Eye, EyeOff, ArrowLeft, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useAuth } from '@/contexts/AuthContext';
@@ -86,11 +85,6 @@ const Register = () => {
       <main className="flex-grow flex items-center justify-center py-16 px-6">
         <div className="w-full max-w-md">
           <div className="mb-8">
-            <Link to="/" className="inline-flex items-center text-voyage-primary hover:text-voyage-secondary transition-smooth">
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              <span>Back to Home</span>
-            </Link>
-            
             <div className="flex flex-col items-center my-6">
               <img src="https://i.imgur.com/fjHClAn.png" alt="Program Davrane" className="h-60 w-auto mb-4" />
               <div className="text-center">
