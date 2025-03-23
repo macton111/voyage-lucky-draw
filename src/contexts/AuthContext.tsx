@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signUp = async (email: string, password: string, firstName: string, lastName: string) => {
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -94,6 +94,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             first_name: firstName,
             last_name: lastName,
           },
+          // Directly sign in after signup by automatically confirming email
+          emailRedirectTo: window.location.origin + '/dashboard',
         },
       });
 
@@ -101,12 +103,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         throw error;
       }
 
-      toast({
-        title: "Registration Successful",
-        description: "Welcome to Voyage Chance! You can now log in to your account.",
-      });
-      
-      navigate('/login');
+      // If no error and we have a session, it means auto-confirmation worked
+      if (data.session) {
+        setSession(data.session);
+        setUser(data.session.user);
+        
+        toast({
+          title: "Registration Successful",
+          description: "Welcome to Voyage Chance! You've been automatically logged in.",
+        });
+        
+        navigate('/dashboard');
+      } else {
+        // In cases where auto-confirmation doesn't work but no error
+        toast({
+          title: "Registration Successful",
+          description: "Welcome to Voyage Chance! You can now log in to your account.",
+        });
+        
+        navigate('/login');
+      }
     } catch (error: any) {
       toast({
         title: "Registration Failed",
