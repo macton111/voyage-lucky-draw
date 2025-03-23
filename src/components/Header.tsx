@@ -39,7 +39,7 @@ const Header = () => {
           className="flex items-center text-voyage-primary"
           aria-label="Program Davrane Home"
         >
-          <img src="/logo.png" alt="Program Davrane" className="h-12 w-auto" />
+          <img src="https://i.imgur.com/fjHClAn.png" alt="Program Davrane" className="h-12 w-auto" />
         </Link>
         
         <nav className="hidden md:flex items-center space-x-1">
