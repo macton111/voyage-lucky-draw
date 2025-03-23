@@ -1,7 +1,5 @@
-
 import { Link } from 'react-router-dom';
 import { 
-  Globe, 
   Facebook, 
   Twitter, 
   Instagram, 
@@ -19,11 +17,11 @@ const Footer = () => {
           {/* Column 1 - About */}
           <div>
             <div className="flex items-center space-x-2 text-voyage-primary mb-4">
-              <Globe className="h-6 w-6" />
-              <span className="text-xl font-semibold">Voyage Chance</span>
+              <img src="/logo.png" alt="Program Davrane" className="h-8 w-auto" />
+              <span className="text-xl font-semibold">Program Davrane</span>
             </div>
             <p className="text-gray-600 text-sm mb-6">
-              Voyage Chance is a lottery platform offering participants the opportunity to win 
+              Program Davrane is a lottery platform offering participants the opportunity to win 
               fully-funded international trips through a transparent monthly draw.
             </p>
             <div className="flex space-x-4">
@@ -131,7 +129,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-gray-200 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-600 mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} Voyage Chance. All rights reserved.
+            &copy; {new Date().getFullYear()} Program Davrane. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <Link to="/terms" className="text-sm text-gray-600 hover:text-voyage-primary">

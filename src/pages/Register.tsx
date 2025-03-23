@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -90,8 +91,13 @@ const Register = () => {
               <span>Back to Home</span>
             </Link>
             
-            <h1 className="text-3xl font-bold mt-6 mb-2">Create your account</h1>
-            <p className="text-gray-600">Join Voyage Chance for a chance to win international travel</p>
+            <div className="flex items-center my-6">
+              <img src="/logo.png" alt="Program Davrane" className="h-10 w-auto mr-3" />
+              <div>
+                <h1 className="text-3xl font-bold mb-2">Create your account</h1>
+                <p className="text-gray-600">Join Program Davrane for a chance to win international travel</p>
+              </div>
+            </div>
           </div>
           
           <form onSubmit={handleSubmit} className="space-y-6">

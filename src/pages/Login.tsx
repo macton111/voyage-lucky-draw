@@ -58,8 +58,13 @@ const Login = () => {
               <span>Back to Home</span>
             </Link>
             
-            <h1 className="text-3xl font-bold mt-6 mb-2">Welcome back</h1>
-            <p className="text-gray-600">Log in to your Voyage Chance account</p>
+            <div className="flex items-center my-6">
+              <img src="/logo.png" alt="Program Davrane" className="h-10 w-auto mr-3" />
+              <div>
+                <h1 className="text-3xl font-bold mb-2">Welcome back</h1>
+                <p className="text-gray-600">Log in to your Program Davrane account</p>
+              </div>
+            </div>
           </div>
           
           <div className="bg-white p-8 rounded-2xl shadow-subtle border border-gray-100">

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Globe, LogOut } from 'lucide-react';
+import { Menu, X, LogOut } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
 const Header = () => {
@@ -38,11 +38,11 @@ const Header = () => {
         <Link 
           to="/" 
           className="flex items-center space-x-2 text-voyage-primary"
-          aria-label="Voyage Chance Home"
+          aria-label="Program Davrane Home"
         >
-          <Globe className="h-6 w-6" />
+          <img src="/logo.png" alt="Program Davrane" className="h-8 w-auto" />
           <span className="text-xl font-semibold tracking-tight hidden sm:inline-block">
-            Voyage Chance
+            Program Davrane
           </span>
         </Link>
         
