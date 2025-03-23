@@ -4,14 +4,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/components/ui/use-toast';
 import { Eye, EyeOff, ArrowLeft, Loader2 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -28,31 +28,22 @@ const Login = () => {
     });
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.email || !formData.password) {
-      toast({
-        title: "Error",
-        description: "Please enter both email and password",
-        variant: "destructive"
-      });
       return;
     }
     
     setIsSubmitting(true);
     
-    // Simulate authentication
-    setTimeout(() => {
+    try {
+      await login(formData.email, formData.password);
+    } catch (error) {
+      console.error('Login error:', error);
+    } finally {
       setIsSubmitting(false);
-      
-      toast({
-        title: "Login Successful",
-        description: "Welcome back to Voyage Chance!",
-      });
-      
-      navigate('/dashboard');
-    }, 1500);
+    }
   };
   
   return (

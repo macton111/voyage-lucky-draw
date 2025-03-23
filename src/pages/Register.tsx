@@ -1,16 +1,17 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/components/ui/use-toast';
 import { Eye, EyeOff, ArrowLeft, Loader2 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/components/ui/use-toast';
 
 const Register = () => {
   const { toast } = useToast();
+  const { signUp } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ const Register = () => {
     });
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -66,19 +67,15 @@ const Register = () => {
       return;
     }
     
-    // Simulate form submission
     setIsSubmitting(true);
     
-    setTimeout(() => {
+    try {
+      await signUp(formData.email, formData.password, formData.firstName, formData.lastName);
+    } catch (error) {
+      console.error('Signup error:', error);
+    } finally {
       setIsSubmitting(false);
-      
-      toast({
-        title: "Registration Successful",
-        description: "Welcome to Voyage Chance! You can now log in to your account.",
-      });
-      
-      // In a real application, you would redirect to login or dashboard
-    }, 1500);
+    }
   };
   
   return (
