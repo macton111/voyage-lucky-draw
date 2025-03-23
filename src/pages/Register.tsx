@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,29 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/components/ui/use-toast';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+// List of all African countries
+const africanCountries = [
+  "Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", 
+  "Burundi", "Cabo Verde", "Cameroon", "Central African Republic", 
+  "Chad", "Comoros", "Congo", "Democratic Republic of the Congo", 
+  "Djibouti", "Egypt", "Equatorial Guinea", "Eritrea", "Eswatini", 
+  "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", 
+  "Ivory Coast", "Kenya", "Lesotho", "Liberia", "Libya", 
+  "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", 
+  "Morocco", "Mozambique", "Namibia", "Niger", "Nigeria", 
+  "Rwanda", "Sao Tome and Principe", "Senegal", "Seychelles", 
+  "Sierra Leone", "Somalia", "South Africa", "South Sudan", 
+  "Sudan", "Tanzania", "Togo", "Tunisia", "Uganda", 
+  "Zambia", "Zimbabwe"
+];
 
 const Register = () => {
   const { toast } = useToast();
@@ -32,6 +56,14 @@ const Register = () => {
     setFormData({
       ...formData,
       [name]: fieldValue
+    });
+  };
+  
+  // Handle country selection separately
+  const handleCountryChange = (value: string) => {
+    setFormData({
+      ...formData,
+      country: value
     });
   };
   
@@ -148,23 +180,16 @@ const Register = () => {
             
             <div className="space-y-2">
               <Label htmlFor="country">Country</Label>
-              <select
-                id="country"
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                required
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                <option value="">Select your country</option>
-                {[
-                  "Benin", "Burkina Faso", "Cameroon", "Central African Republic", 
-                  "Chad", "Congo", "Democratic Republic of Congo", "Gabon", "Ghana", 
-                  "Ivory Coast", "Mali", "Niger", "Nigeria", "Senegal", "Togo"
-                ].map(country => (
-                  <option key={country} value={country}>{country}</option>
-                ))}
-              </select>
+              <Select value={formData.country} onValueChange={handleCountryChange}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select your country" />
+                </SelectTrigger>
+                <SelectContent>
+                  {africanCountries.map(country => (
+                    <SelectItem key={country} value={country}>{country}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             
             <div className="space-y-2">
