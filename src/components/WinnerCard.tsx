@@ -1,5 +1,5 @@
 
-import { Award, Calendar, MapPin } from 'lucide-react';
+import { Award, Calendar, MapPin, Plane } from 'lucide-react';
 
 interface WinnerCardProps {
   name: string;
