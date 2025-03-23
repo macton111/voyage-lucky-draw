@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,19 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				voyage: {
+					'background': '#f8f9fa',
+					'foreground': '#1a1a1a',
+					'primary': '#0066cc',
+					'secondary': '#4a8fe7',
+					'accent': '#e6f0ff',
+					'muted': '#f1f5f9',
+					'success': '#34c759',
+					'warning': '#ff9500',
+					'error': '#ff3b30',
+					'card': '#ffffff',
+					'card-hover': '#f7fafc',
 				}
 			},
 			borderRadius: {
@@ -84,12 +98,50 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
+				},
+				'slide-up': {
+					'0%': { transform: 'translateY(20px)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'slide-down': {
+					'0%': { transform: 'translateY(-20px)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'zoom-in': {
+					'0%': { transform: 'scale(0.95)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
+				},
+				'pulse-gentle': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.5s ease-out',
+				'slide-up': 'slide-up 0.5s ease-out',
+				'slide-down': 'slide-down 0.5s ease-out',
+				'zoom-in': 'zoom-in 0.3s ease-out',
+				'pulse-gentle': 'pulse-gentle 2s ease-in-out infinite'
+			},
+			fontFamily: {
+				sans: ['SF Pro Display', 'Helvetica Neue', 'Arial', 'sans-serif'],
+				mono: ['SF Mono', 'monospace'],
+			},
+			boxShadow: {
+				'subtle': '0 1px 2px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.02)',
+				'elevated': '0 4px 6px rgba(0, 0, 0, 0.01), 0 5px 15px rgba(0, 0, 0, 0.03)',
+				'prominent': '0 10px 25px rgba(0, 0, 0, 0.04), 0 8px 10px rgba(0, 0, 0, 0.02)',
+			},
+			backdropFilter: {
+				'none': 'none',
+				'blur': 'blur(8px)',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
