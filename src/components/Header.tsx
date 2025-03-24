@@ -45,7 +45,7 @@ const Header = () => {
           <img 
             src="https://i.imgur.com/fjHClAn.png" 
             alt="Program Davrane" 
-            className={isMobile ? "h-24 w-auto" : "h-36 w-auto"} 
+            className={isMobile ? "h-16 w-auto" : "h-36 w-auto"} 
           />
         </Link>
         

@@ -24,7 +24,14 @@ const PaymentPopup = ({
     });
     
     // Here you would typically redirect to a payment gateway or process the payment
-    setTimeout(() => onOpenChange(false), 1500);
+    // For now, we'll just simulate a successful payment with a delay
+    setTimeout(() => {
+      toast({
+        title: "Payment Success",
+        description: "Your payment was successful!",
+      });
+      onOpenChange(false);
+    }, 1500);
   };
 
   return (
