@@ -24,7 +24,7 @@ const PaymentPopup = ({
     });
     
     // Here you would typically redirect to a payment gateway or process the payment
-    setTimeout(() => onOpenChange(false), 1000);
+    setTimeout(() => onOpenChange(false), 1500);
   };
 
   return (
@@ -82,7 +82,8 @@ const PaymentPopup = ({
                   </div>
                   
                   <Button 
-                    className="w-full mt-4 bg-voyage-primary hover:bg-voyage-secondary"
+                    className="w-full mt-4"
+                    variant="default"
                     onClick={() => handlePayment('Mobile Money')}
                   >
                     <Smartphone className="h-4 w-4 mr-2" />
@@ -150,7 +151,8 @@ const PaymentPopup = ({
                   </div>
                   
                   <Button 
-                    className="w-full mt-2 bg-voyage-primary hover:bg-voyage-secondary"
+                    className="w-full mt-2"
+                    variant="default"
                     onClick={() => handlePayment('QR Code')}
                   >
                     <QrCode className="h-4 w-4 mr-2" />
