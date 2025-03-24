@@ -29,7 +29,7 @@ const PaymentPopup = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] p-4 sm:p-6 rounded-lg">
         <DialogHeader>
           <DialogTitle>Make a Payment</DialogTitle>
           <DialogDescription>
@@ -145,8 +145,8 @@ const PaymentPopup = ({
                   <p className="text-sm text-gray-500">Scan this QR code with your mobile banking app:</p>
                   
                   <div className="flex justify-center py-4">
-                    <div className="w-48 h-48 bg-gray-200 flex items-center justify-center">
-                      <QrCode className="h-32 w-32 text-gray-500" />
+                    <div className="w-36 sm:w-48 h-36 sm:h-48 bg-gray-200 flex items-center justify-center">
+                      <QrCode className="h-24 sm:h-32 w-24 sm:w-32 text-gray-500" />
                     </div>
                   </div>
                   

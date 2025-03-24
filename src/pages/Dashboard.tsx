@@ -20,12 +20,14 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ReferralSystem from '@/components/ReferralSystem';
 import PaymentPopup from '@/components/PaymentPopup';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Dashboard = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
   const [currentTab, setCurrentTab] = useState("overview");
   const [paymentDialogOpen, setPaymentDialogOpen] = useState(false);
+  const isMobile = useIsMobile();
   const [userData, setUserData] = useState({
     name: "Aminata Diallo",
     status: "active", // active, pending, selected
@@ -114,18 +116,18 @@ const Dashboard = () => {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
       
-      <main className="flex-grow pt-24 pb-16 px-6">
+      <main className="flex-grow pt-24 pb-16 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
             <div>
-              <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold mb-2">Dashboard</h1>
               <p className="text-gray-600">Welcome back, {userData.name}</p>
             </div>
             
             <div className="mt-4 sm:mt-0">
               <Button 
                 onClick={handleMakePayment}
-                className="bg-voyage-primary hover:bg-voyage-secondary rounded-xl py-6 px-6"
+                className="w-full sm:w-auto bg-voyage-primary hover:bg-voyage-secondary rounded-xl py-4 sm:py-6 px-4 sm:px-6"
               >
                 <DollarSign className="h-5 w-5 mr-2" />
                 Make Payment
@@ -139,7 +141,7 @@ const Dashboard = () => {
             onValueChange={setCurrentTab}
             className="space-y-6"
           >
-            <TabsList className="grid grid-cols-3 md:w-[400px] bg-white shadow-subtle">
+            <TabsList className={`grid grid-cols-3 ${isMobile ? 'w-full' : 'md:w-[400px]'} bg-white shadow-subtle`}>
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="history">History</TabsTrigger>
               <TabsTrigger value="notifications">Notifications</TabsTrigger>
@@ -147,7 +149,7 @@ const Dashboard = () => {
             
             <TabsContent value="overview" className="space-y-6 animate-fade-in">
               {/* Status Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                 {/* Next Draw Card */}
                 <Card className="bg-white shadow-subtle hover:shadow-elevated transition-shadow">
                   <CardHeader className="pb-2">
@@ -248,7 +250,7 @@ const Dashboard = () => {
                   <CardDescription>Your latest lottery activities</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-6">
+                  <div className="space-y-4 sm:space-y-6">
                     {userData.participations.slice(0, 3).map((participation) => (
                       <div key={participation.id} className="flex items-center justify-between">
                         <div className="flex items-center">
@@ -260,9 +262,9 @@ const Dashboard = () => {
                             )}
                           </div>
                           
-                          <div className="ml-4">
-                            <p className="font-medium">{formatDate(participation.date)} Draw</p>
-                            <p className="text-sm text-gray-600">
+                          <div className="ml-3 sm:ml-4">
+                            <p className="font-medium text-sm sm:text-base">{formatDate(participation.date)} Draw</p>
+                            <p className="text-xs sm:text-sm text-gray-600">
                               Status: {getStatusText(participation.status)}
                               {participation.paid ? ', Payment: Completed' : ', Payment: Pending'}
                             </p>
@@ -294,10 +296,10 @@ const Dashboard = () => {
                   <CardDescription>All your previous entries and results</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-6">
+                  <div className="space-y-4 sm:space-y-6">
                     {userData.participations.map((participation) => (
-                      <div key={participation.id} className="flex items-center justify-between p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
-                        <div className="flex items-center">
+                      <div key={participation.id} className="flex flex-wrap sm:flex-nowrap items-center justify-between p-3 sm:p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
+                        <div className="flex items-center w-full sm:w-auto">
                           <div className={`w-10 h-10 rounded-full flex items-center justify-center ${getStatusColor(participation.status)}`}>
                             {participation.status === 'selected' ? (
                               <Star className="h-5 w-5 text-white" />
@@ -306,16 +308,16 @@ const Dashboard = () => {
                             )}
                           </div>
                           
-                          <div className="ml-4">
-                            <p className="font-medium">{formatDate(participation.date)} Draw</p>
-                            <p className="text-sm text-gray-600">
+                          <div className="ml-3 sm:ml-4">
+                            <p className="font-medium text-sm sm:text-base">{formatDate(participation.date)} Draw</p>
+                            <p className="text-xs sm:text-sm text-gray-600">
                               Status: {getStatusText(participation.status)}
                               {participation.paid ? ', Payment: Completed' : ', Payment: Pending'}
                             </p>
                           </div>
                         </div>
                         
-                        <Button variant="ghost" size="sm" className="rounded-lg">
+                        <Button variant="ghost" size="sm" className="rounded-lg mt-2 sm:mt-0">
                           Details
                         </Button>
                       </div>
@@ -336,7 +338,7 @@ const Dashboard = () => {
                     {userData.notifications.map((notification) => (
                       <div 
                         key={notification.id} 
-                        className={`p-4 rounded-xl transition-colors ${notification.read ? 'bg-white' : 'bg-blue-50'}`}
+                        className={`p-3 sm:p-4 rounded-xl transition-colors ${notification.read ? 'bg-white' : 'bg-blue-50'}`}
                       >
                         <div className="flex items-start">
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center bg-voyage-primary bg-opacity-10 text-voyage-primary flex-shrink-0`}>
@@ -344,11 +346,11 @@ const Dashboard = () => {
                           </div>
                           
                           <div className="ml-3 flex-grow">
-                            <div className="flex items-center justify-between">
-                              <p className="font-medium">{notification.title}</p>
-                              <span className="text-xs text-gray-500">{formatDateRelative(notification.date)}</span>
+                            <div className="flex items-start sm:items-center justify-between flex-col sm:flex-row">
+                              <p className="font-medium text-sm sm:text-base">{notification.title}</p>
+                              <span className="text-xs text-gray-500 mt-1 sm:mt-0">{formatDateRelative(notification.date)}</span>
                             </div>
-                            <p className="text-sm text-gray-600 mt-1">{notification.description}</p>
+                            <p className="text-xs sm:text-sm text-gray-600 mt-1">{notification.description}</p>
                           </div>
                         </div>
                       </div>

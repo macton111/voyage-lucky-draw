@@ -1,14 +1,17 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, LogOut } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { user, logout } = useAuth();
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +30,7 @@ const Header = () => {
   
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 py-4 px-6 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 py-2 md:py-4 px-4 md:px-6 transition-all duration-300 ${
         isScrolled || isMobileMenuOpen 
           ? 'bg-white bg-opacity-80 backdrop-blur-md shadow-subtle' 
           : 'bg-transparent'
@@ -39,7 +42,11 @@ const Header = () => {
           className="flex items-center text-voyage-primary"
           aria-label="Program Davrane Home"
         >
-          <img src="https://i.imgur.com/fjHClAn.png" alt="Program Davrane" className="h-36 w-auto" />
+          <img 
+            src="https://i.imgur.com/fjHClAn.png" 
+            alt="Program Davrane" 
+            className={isMobile ? "h-24 w-auto" : "h-36 w-auto"} 
+          />
         </Link>
         
         <nav className="hidden md:flex items-center space-x-1">
@@ -57,7 +64,7 @@ const Header = () => {
           {user ? (
             <Button 
               variant="outline" 
-              className="rounded-full px-5 hover:bg-voyage-accent"
+              className="rounded-full px-5 hover:bg-voyage-accent ml-4"
               onClick={logout}
             >
               <LogOut className="h-4 w-4 mr-2" />
