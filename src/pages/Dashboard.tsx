@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { 
   Ticket, 
   Clock, 
@@ -18,11 +18,14 @@ import {
 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ReferralSystem from '@/components/ReferralSystem';
+import PaymentPopup from '@/components/PaymentPopup';
 
 const Dashboard = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
   const [currentTab, setCurrentTab] = useState("overview");
+  const [paymentDialogOpen, setPaymentDialogOpen] = useState(false);
   const [userData, setUserData] = useState({
     name: "Aminata Diallo",
     status: "active", // active, pending, selected
@@ -71,10 +74,7 @@ const Dashboard = () => {
   };
   
   const handleMakePayment = () => {
-    toast({
-      title: "Payment Initiated",
-      description: "You're being redirected to the payment page.",
-    });
+    setPaymentDialogOpen(true);
   };
   
   const getDaysUntilDraw = () => {
@@ -238,6 +238,9 @@ const Dashboard = () => {
                 </Card>
               </div>
               
+              {/* Referral System Card */}
+              <ReferralSystem />
+              
               {/* Recent Activity */}
               <Card className="bg-white shadow-subtle">
                 <CardHeader>
@@ -357,6 +360,12 @@ const Dashboard = () => {
           </Tabs>
         </div>
       </main>
+      
+      {/* Payment Popup Dialog */}
+      <PaymentPopup 
+        open={paymentDialogOpen} 
+        onOpenChange={setPaymentDialogOpen} 
+      />
       
       <Footer />
     </div>
