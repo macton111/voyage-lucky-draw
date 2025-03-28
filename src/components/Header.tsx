@@ -51,6 +51,7 @@ const Header = () => {
         
         <nav className="hidden md:flex items-center space-x-1">
           <NavLink to="/" isActive={isActive('/')}>Home</NavLink>
+          <NavLink to="/about" isActive={isActive('/about')}>About</NavLink>
           <NavLink to="/winners" isActive={isActive('/winners')}>Winners</NavLink>
           {user && (
             <>
@@ -100,6 +101,7 @@ const Header = () => {
         <div className="md:hidden absolute top-full left-0 right-0 bg-white bg-opacity-95 backdrop-blur-md shadow-elevated animate-fade-in">
           <div className="flex flex-col p-6 space-y-4">
             <MobileNavLink to="/" isActive={isActive('/')}>Home</MobileNavLink>
+            <MobileNavLink to="/about" isActive={isActive('/about')}>About</MobileNavLink>
             <MobileNavLink to="/winners" isActive={isActive('/winners')}>Winners</MobileNavLink>
             
             {user ? (

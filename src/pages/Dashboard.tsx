@@ -14,13 +14,17 @@ import {
   Star, 
   ChevronRight, 
   Bell, 
-  DollarSign 
+  DollarSign,
+  User,
+  Mail,
+  Phone 
 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ReferralSystem from '@/components/ReferralSystem';
 import PaymentPopup from '@/components/PaymentPopup';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Dashboard = () => {
   const { toast } = useToast();
@@ -28,8 +32,12 @@ const Dashboard = () => {
   const [currentTab, setCurrentTab] = useState("overview");
   const [paymentDialogOpen, setPaymentDialogOpen] = useState(false);
   const isMobile = useIsMobile();
+  const { user } = useAuth();
+  
   const [userData, setUserData] = useState({
     name: "Aminata Diallo",
+    email: user?.email || "",
+    phone: "+221 77 123 4567",
     status: "active", // active, pending, selected
     nextDrawDate: "2023-08-15T00:00:00Z",
     paymentStatus: "paid", // paid, pending, unpaid
@@ -46,12 +54,26 @@ const Dashboard = () => {
   });
   
   useEffect(() => {
+    // If we have user data from auth context, update the local state
+    if (user) {
+      const firstName = user.user_metadata?.first_name || "";
+      const lastName = user.user_metadata?.last_name || "";
+      const fullName = `${firstName} ${lastName}`.trim();
+      
+      setUserData(prev => ({
+        ...prev,
+        name: fullName || prev.name,
+        email: user.email || prev.email,
+        phone: user.user_metadata?.phone || prev.phone
+      }));
+    }
+    
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
     
     return () => clearTimeout(timer);
-  }, []);
+  }, [user]);
   
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -132,8 +154,9 @@ const Dashboard = () => {
             onValueChange={setCurrentTab}
             className="space-y-6"
           >
-            <TabsList className={`grid grid-cols-3 ${isMobile ? 'w-full' : 'md:w-[400px]'} bg-white shadow-subtle`}>
+            <TabsList className={`grid grid-cols-4 ${isMobile ? 'w-full' : 'md:w-[500px]'} bg-white shadow-subtle`}>
               <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="profile">Profile</TabsTrigger>
               <TabsTrigger value="history">History</TabsTrigger>
               <TabsTrigger value="notifications">Notifications</TabsTrigger>
             </TabsList>
@@ -285,6 +308,97 @@ const Dashboard = () => {
                     >
                       View All History
                     </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            {/* New Profile Tab */}
+            <TabsContent value="profile" className="space-y-6 animate-fade-in">
+              <Card className="bg-white shadow-subtle">
+                <CardHeader>
+                  <CardTitle className="text-xl">Profile Information</CardTitle>
+                  <CardDescription>Your personal details</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    <div className="flex flex-col md:flex-row gap-6">
+                      <div className="flex-1 space-y-4">
+                        <div className="p-4 bg-gray-50 rounded-xl">
+                          <div className="flex items-start gap-3">
+                            <User className="h-5 w-5 text-voyage-primary mt-0.5" />
+                            <div>
+                              <p className="text-sm text-gray-500">Full Name</p>
+                              <p className="font-medium">{userData.name}</p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="p-4 bg-gray-50 rounded-xl">
+                          <div className="flex items-start gap-3">
+                            <Mail className="h-5 w-5 text-voyage-primary mt-0.5" />
+                            <div>
+                              <p className="text-sm text-gray-500">Email Address</p>
+                              <p className="font-medium">{userData.email}</p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="p-4 bg-gray-50 rounded-xl">
+                          <div className="flex items-start gap-3">
+                            <Phone className="h-5 w-5 text-voyage-primary mt-0.5" />
+                            <div>
+                              <p className="text-sm text-gray-500">Phone Number</p>
+                              <p className="font-medium">{userData.phone}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex-1 space-y-4">
+                        <div className="p-4 bg-gray-50 rounded-xl">
+                          <div className="flex items-start gap-3">
+                            <Calendar className="h-5 w-5 text-voyage-primary mt-0.5" />
+                            <div>
+                              <p className="text-sm text-gray-500">Next Draw Date</p>
+                              <p className="font-medium">{formatDate(userData.nextDrawDate)}</p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="p-4 bg-gray-50 rounded-xl">
+                          <div className="flex items-start gap-3">
+                            <CreditCard className="h-5 w-5 text-voyage-primary mt-0.5" />
+                            <div>
+                              <p className="text-sm text-gray-500">Payment Status</p>
+                              <p className="font-medium capitalize">{userData.paymentStatus}</p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="p-4 bg-gray-50 rounded-xl">
+                          <div className="flex items-start gap-3">
+                            <Ticket className="h-5 w-5 text-voyage-primary mt-0.5" />
+                            <div>
+                              <p className="text-sm text-gray-500">Participation Status</p>
+                              <p className="font-medium capitalize">{userData.status}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-end">
+                      <Button 
+                        onClick={() => toast({ 
+                          title: "Feature Coming Soon", 
+                          description: "Profile editing will be available in the next update."
+                        })}
+                        className="rounded-xl"
+                      >
+                        Edit Profile
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
