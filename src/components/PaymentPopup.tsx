@@ -18,6 +18,7 @@ const PaymentPopup = ({
   const [paymentTab, setPaymentTab] = useState("mobile");
   
   const handlePayment = (method: string) => {
+    console.log(`Payment method selected: ${method}`);
     toast({
       title: "Payment Initiated",
       description: `You're being redirected to ${method} payment.`,
@@ -33,6 +34,8 @@ const PaymentPopup = ({
       onOpenChange(false);
     }, 1500);
   };
+
+  console.log("Payment popup state:", { open });
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

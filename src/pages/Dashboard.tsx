@@ -76,6 +76,7 @@ const Dashboard = () => {
   };
   
   const handleMakePayment = () => {
+    console.log("Opening payment dialog");
     setPaymentDialogOpen(true);
   };
   
