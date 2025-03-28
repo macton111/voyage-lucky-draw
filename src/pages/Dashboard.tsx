@@ -124,16 +124,6 @@ const Dashboard = () => {
               <h1 className="text-2xl sm:text-3xl font-bold mb-2">Dashboard</h1>
               <p className="text-gray-600">Welcome back, {userData.name}</p>
             </div>
-            
-            <div className="mt-4 sm:mt-0">
-              <Button 
-                onClick={handleMakePayment}
-                className="w-full sm:w-auto bg-voyage-primary hover:bg-voyage-secondary rounded-xl py-4 sm:py-6 px-4 sm:px-6"
-              >
-                <DollarSign className="h-5 w-5 mr-2" />
-                Make Payment
-              </Button>
-            </div>
           </div>
           
           <Tabs 
@@ -179,9 +169,19 @@ const Dashboard = () => {
                 {/* Payment Status Card */}
                 <Card className="bg-white shadow-subtle hover:shadow-elevated transition-shadow">
                   <CardHeader className="pb-2">
-                    <CardTitle className="flex items-center text-lg">
-                      <CreditCard className="h-5 w-5 mr-2 text-voyage-primary" />
-                      Payment Status
+                    <CardTitle className="flex items-center justify-between text-lg">
+                      <div className="flex items-center">
+                        <CreditCard className="h-5 w-5 mr-2 text-voyage-primary" />
+                        Payment Status
+                      </div>
+                      <Button 
+                        onClick={handleMakePayment}
+                        className="bg-voyage-primary hover:bg-voyage-secondary rounded-xl py-2 px-3 text-xs"
+                        size="sm"
+                      >
+                        <DollarSign className="h-4 w-4 mr-1" />
+                        Make Payment
+                      </Button>
                     </CardTitle>
                     <CardDescription>
                       For August 2023 Draw
