@@ -139,7 +139,7 @@ const Dashboard = () => {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
       
-      <main className="flex-grow pt-24 pb-16 px-4 sm:px-6">
+      <main className="flex-grow pt-32 pb-16 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
             <div>
